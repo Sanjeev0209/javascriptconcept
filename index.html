@@ -1,72 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>javascript concept</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
-<!-- Closures -->
+    <h2>Array Methods</h2>
+    <p id="arrayvalue"></p>
+    <p>All employees name</p>
+    <button id="btn4">Map</button><br>
+    <p id="arrayoutput"></p>
+    <p>Filter by Position</p>
+    <select id="arrayinput" name="arrayinput">
+        <option value="" disabled selected>Select an option</option>
+        <option value="react">react</option>
+        <option value="node">node</option>
+    </select>
+    <br><br>
+    <button id="btn2">Filter</button><br>
+    <p id="arrayoutput1"></p>
+    <p>All Employees Total salary</p>
+    <button id="btn3">Reduce</button>
+    <p id="arrayoutput2"></p>
+    <!-- -------------------------------------------------------------------------- -->
+    <!-- Lexical Scope -->
+    <h2>Lexical Scope</h2>
+    <p>One function can access the variable to outside the function</p>
+    <input type="text" id="nameInput" placeholder="Enter your name" /><br><br>
+    <button id="lexicalBtn">Lexical Scope</button>
+    <p id="lexicalOutput"></p>
+    <!-- Closures -->
     <div>
         <h2>Closures Example</h2>
-  <input type="number" id="moneyInput" placeholder="Enter amount (₹)" />
-  <button id="depositBtn">Deposit</button>
-  <button id="withdrawBtn">Withdraw</button>
-</div>
+        <p>Execute line to access the variable in function inside the function</p>
+        <input type="number" id="moneyInput" placeholder="Enter amount (₹)" />
+        <button id="depositBtn">Deposit</button>
+        <button id="withdrawBtn">Withdraw</button>
+    </div>
 
-<h3 id="currentBalance">Balance: ₹1000</h3>
-<div id="transactionLog"></div>
+    <h3 id="currentBalance">Balance: ₹1000</h3>
+    <div id="transactionLog"></div>
 
-<!-- lexical scope -->
- <h2>Lexical Scope </h2>
-<p> one function can access the variable to outside the function</p>
-
-
-<!-- Hoisting and execution context     -->
-
-<h2>Hoisting </h2>
- <p></p>not declare, function before console or output </p>
-  <h2>Execution context </h2>
- <p>javascript execute line by line</p>
-
-
+    <!-- Hoisting and execution context     -->
+    <h2>Hoisting </h2>
+    <p></p>not declare, function before console or output </p>
+    <h2>Execution context </h2>
+    <p>javascript execute line by line</p>
+    <!-- --------------------------------------------------------- -->
     <h2>Promise Example</h2>
-    <button id="btn" >promise</button>
-    <p id="promise"></p >
+    <button id="btn">promise</button>
+    <p id="promise"></p>
+    <h2>Event Loop and microtasks</h2>
+    <p> set timeout go to task queue and next function(promise) go to microtasks,
+        microtask 1st execute and task queue execute 2nd
+    </p>
+    <!-- ------------------------------------------------------------------------------- -->
+    <h2>Deep Cloning</h2>
+    <p>deep cloning is no affect the original values, Only cloning the data</p>
+    <!-- curring -->
+    <h2>Currying Example</h2>
+    <p>currying is multiple argument to that each take a single argument
+    </p>
+    <h4>GST Calculator</h4>
+    <input type="text" id="input1" placeholder="Enter Amount">
+    <button id="btn1">Calculate</button>
+    <div id="taxvalue" class="taxvalue"></div>
 
-<!-- curring -->
- <h2>Currying Example</h2>
- <h4>GST Calculator</h4>
- <input type="text" id="input1" placeholder="Enter Amount">
-<button id="btn1">Calculate</button>
-<div id="taxvalue" class="taxvalue"></div>
-
-
-<!-- Event Delegation Example -->
-        <h2>Event Delegation Example</h2>
-      <div id="product-container">
-    <div class="product">
-        <h3>Mobile</h3>
-        <p>Price: ₹25,000</p>
-        <button class="add-cart">Add to Cart</button>
+    <!-- Event Delegation Example -->
+    <h2>Event Delegation Example</h2>
+    <div id="product-container">
+        <div class="product">
+            <h3>Mobile</h3>
+            <p>Price: ₹25,000</p>
+            <button class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>Laptop</h3>
+            <p>Price: ₹75,000</p>
+            <button class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>Headphones</h3>
+            <p>Price: ₹2,000</p>
+            <button class="add-cart">Add to Cart</button>
+        </div>
+        <div id="eventdelegation" class="eventdelegation"></div>
     </div>
-    <div class="product">
-        <h3>Laptop</h3>
-        <p>Price: ₹75,000</p>
-        <button class="add-cart">Add to Cart</button>
+    <h2>Prototype</h2>
+    <div class="card">
+        <p id="name"></p>
+        <p id="age"></p>
+        <p id="role">Student</p>
+        <button onclick="showGreeting()">
+            Say Hello
+        </button>
+        <p id="message"></p>
     </div>
-    <div class="product">
-        <h3>Headphones</h3>
-        <p>Price: ₹2,000</p>
-        <button class="add-cart">Add to Cart</button>
+    <h2>Inheritance</h2>
+    <div class="card">
+        <h3>Dog</h3>
+        <p>Animal: Dog</p>
+        <button onclick="myDog.eat()">
+            Eat
+        </button>
+        <button onclick="myDog.bark()">
+            Bark
+        </button>
+        <p id="result">Choose an action</p>
     </div>
-    <div id="eventdelegation" class="eventdelegation"></div>
-</div>
-
-
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
