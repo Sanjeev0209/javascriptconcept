@@ -1,4 +1,4 @@
-// //Array method map()
+
 // Employee array
 let value1 = [
   { id: 1, name: "sanjeev", position: "react", salary: 25000 },
@@ -20,7 +20,10 @@ document.getElementById("arrayvalue").innerHTML =
     `).join("");
 // MAP - Display employee names
 btn4.addEventListener("click", function () {
-  let result = value1.map(value => value.name);
+
+
+
+  let result = value1.myMap(value => value.name);
   document.getElementById("arrayoutput").textContent =
     result.join(", ");
 });
@@ -270,8 +273,108 @@ class Dog extends Animal {
 }
 // Create object
 const myDog = new Dog();
-// -----------------------------------------------------------------------------
-// Polyfills for map
+// ------------------------------------------------------------------
+// Polyfills for Promise
+function MyPromise(callback) {
+    let state = "pending";
+    let value;
+    function resolve(result) {
+        if (state === "pending") {
+            state = "fulfilled";
+            value = result;
+        }
+    }
+    function reject(error) {
+        if (state === "pending") {
+            state = "rejected";
+            value = error;
+        }
+    }
+    callback(resolve, reject);
+    this.then = function (success) {
+        if (state === "fulfilled") {
+            success(value);
+        }
+        return this;
+    };
+    this.catch = function (failure) {
+        if (state === "rejected") {
+            failure(value);
+        }
+        return this;
+    };
+}
+const orderBtn = document.getElementById("orderBtn");
+const output11 = document.getElementById("output11");
+const polypromiseinput = document.getElementById("polypromiseinput");
+orderBtn.addEventListener("click", function () {
+    output11.innerHTML = "";
+    const order = new MyPromise((resolve, reject) => {
+        let payment = polypromiseinput.checked;
+        if (payment) {
+            resolve("Order Confirmed");
+        } else  {
+            reject("Payment Failed");
+        }
+    });
+    order
+        .then(result => {
+            output11.innerHTML = `
+                <p style="color:green">${result}</p> 
+            `;
+        })
+        .catch(error => {
+            output11.innerHTML = `
+                <p style="color:red">${error}</p>
+            `;
+        });
+});
+// ---------------------------------------------------------------------------
+// Polyfills for filter
+const polyfilterdata = document.getElementById("polyfilterdata");
+const products = [
+    { name: "Laptop", stock: 10 },
+    { name: "Mobile", stock: 0 },
+    { name: "Keyboard", stock: 5 },
+    { name: "Mouse", stock: 0 }
+];
+
+const polybtn = document.getElementById("polybtn");
+const polyfilteroutput = document.getElementById("polyfilteroutput");
+
+document.getElementById("polyfilterdata").innerHTML =
+products.map(value11 =>`
+<p>${(value11.name)+" "+value11.stock}</p>
+`).join("");
+// Custom Filter Method
+Array.prototype.myFilter = function (callback) {
+    let result = [];
+    for (let i = 0; i < this.length; i++) {
+        if (callback(this[i], i, this)) {
+            result.push(this[i]);
+        }
+    }
+    return result;
+};
+// Button Click
+polybtn.addEventListener("click", function () {
+    const available = products.myFilter(
+        product => product.stock > 0
+    );
+    polyfilteroutput.innerHTML = "";
+    available.forEach(product => {
+        polyfilteroutput.innerHTML += `
+            <p>
+                Product: ${product.name} |
+                Stock: ${product.stock}
+            </p>
+        `;
+    });
+});
+// ========================================================================================
+// polyfils map()
+const polybtn1 = document.getElementById("polybtn1");
+const polyoutput1 = document.getElementById("polyoutput1");
 Array.prototype.myMap = function (callback) {
 
   let result = [];
@@ -280,80 +383,12 @@ Array.prototype.myMap = function (callback) {
   }
   return result;
 };
+polybtn1.addEventListener("click", function () {
 
-const prices = [100, 200, 300, 400];
-const gstPrices = prices.myMap(price => price * 1.18);
-console.log(gstPrices);
+const gstPrices = products.myMap(product => product.name );
+polyoutput1.innerHTML = gstPrices;
 
-// ------------------------------------------------------------------
-// Polyfills for Promise
-function MyPromise(callback) {
-  let state = "pending";
-  let value;
-  function resolve(result) {
-    if (state === "pending") {
-      state = "fulfilled";
-      value = result;
-    }
-  }
-  function reject(error) {
-    if (state === "pending") {
-      state = "rejected";
-      value = error;
-    }
-  }
-  callback(resolve, reject);
-  this.then = function (success) {
-    if (state === "fulfilled") {
-      success(value);
-    }
-    return this;
-  };
-
-  this.catch = function (failure) {
-    if (state === "rejected") {
-      failure(value);
-    }
-    return this;
-  };
-}
-
-const order = new MyPromise((resolve, reject) => {
-  let payment = true;
-  if (payment) {
-    resolve("Order Confirmed");
-  } else {
-    reject("Payment Failed");
-  }
 });
-
-order
-  .then(result => console.log(result))
-  .catch(error => console.log(error));
-// ---------------------------------------------------------------------------
-// Polyfills for filter
-
-const products = [
-  { name: "Laptop", stock: 10 },
-  { name: "Mobile", stock: 0 },
-  { name: "Keyboard", stock: 5 },
-  { name: "Mouse", stock: 0 }
-];
-Array.prototype.myFilter = function (callback) {
-  let result = [];
-  for (let i = 0; i < this.length; i++) {
-    if (callback(this[i], i, this)) {
-      result.push(this[i]);
-    }
-  }
-  return result;
-};
-
-const available = products.myFilter(
-  product => product.stock > 0
-);
-
-console.log(available);
 // ================================================================================
 //Event Loop and Microtasks
 console.log(1);
@@ -367,3 +402,45 @@ Promise.resolve().then(() => {
 });
 
 console.log(4);
+// =============================================================================
+    // Debounce helper
+    function debounce(func, delay) {
+      let timeoutId;
+      return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    }
+       const searchInput = document.getElementById("searchInput");
+    const debounceOutput = document.getElementById("debounceOutput");
+
+    const updateSearch = debounce((text) => {
+      debounceOutput.textContent = `Debounced value: "${text}"`;
+    }, 500);
+        searchInput.addEventListener("input", (e) => {
+      updateSearch(e.target.value);
+    });
+
+// ===============================================================================
+// throttle
+    const buyBtn = document.getElementById("buyBtn");
+    const result = document.getElementById("result11");
+
+function throttle(func, delay) {
+    let lastCall = 0;
+    return function () {
+        let currentTime = Date.now();
+        if (currentTime - lastCall >= delay) {
+            lastCall = currentTime;
+            func();
+        }
+    };
+}
+function buyProduct() {
+    result.textContent = "Product purchased successfully!";
+    console.log("Buy button clicked");
+}
+const throttledBuy = throttle(buyProduct, 3000);
+buyBtn.addEventListener("click", throttledBuy);

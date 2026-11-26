@@ -9,3 +9,25 @@
     width: 150px;
     display:grid;
 }
+h2{
+      text-decoration: underline;
+}
+#arrayvalue{
+    display: flex;
+    gap: 50px;
+}
+#arrayoutput,#arrayoutput1,#arrayoutput2{
+    color: green;
+}
+#lexicalOutput{
+    color: blueviolet;
+}
+#promise{
+    color: blue;
+}
+#polyfilteroutput{
+    color: green;
+}
+#polyoutput1{
+    color: blue;
+}
